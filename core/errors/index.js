@@ -1,37 +1,9 @@
 'use strict';
 
+const _ = require('lodash');
 const CustomError = require('./custom');
 const http = require('http-constants');
-
-class InternalServerError extends CustomError {
-    constructor (message, extra) {
-        super(message, http.codes.INTERNAL_SERVER_ERROR, extra);
-    }
-}
-
-class ConflictError extends CustomError {
-    constructor (message, extra) {
-        super(message, http.codes.CONFLICT, extra);
-    }
-}
-
-class Unauthorized extends CustomError {
-    constructor (message, extra) {
-        super(message, http.codes.UNAUTHORIZED, extra);
-    }
-}
-
-class BadRequest extends CustomError {
-    constructor (message, extra) {
-        super(message, http.codes.BAD_REQUEST, extra);
-    }
-}
-
-class NotFound extends CustomError {
-    constructor (message, extra) {
-        super(message, http.codes.NOT_FOUND, extra);
-    }
-}
+const errors = {};
 
 class JsonErrorResponse extends CustomError {
     constructor (json, status = http.codes.INTERNAL_SERVER_ERROR, message = 'Json Error Response') {
@@ -44,14 +16,23 @@ class JsonErrorResponse extends CustomError {
     }
 }
 
-module.exports = {
-    CannotExecuteQuery: new InternalServerError('The system cannot execute the query.'),
-    Internal: new InternalServerError('Internal Server Error.'),
-    InternalServerError,
-    JsonErrorResponse,
-    ConflictError,
-    Unauthorized,
-    BadRequest,
-    NotFound,
-    CustomError
-};
+errors.JsonErrorResponse = JsonErrorResponse;
+errors.CustomError = CustomError;
+
+_.reduce(http.codes, (errors, code, name) => {
+    name = _.upperFirst(_.camelCase(name));
+
+    const HttpErrorClass = (new Function(`
+        return function ${name} (message, extra) {
+            CustomError.call(this, message, ${code}, extra);
+        }
+    `))();
+
+    HttpErrorClass.prototype = Object.create(CustomError.prototype);
+    HttpErrorClass.prototype.constructor = HttpErrorClass;
+
+    errors[name] = HttpErrorClass;
+    return errors;
+}, errors);
+
+module.exports = errors;
