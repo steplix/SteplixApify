@@ -19,6 +19,20 @@
   "bugs": {
     "url": "https://github.com/steplix/SteplixApify/issues"
   },
+  "keywords": [
+    "api",
+    "apify",
+    "db",
+    "database",
+    "map",
+    "mapper",
+    "mapping",
+    "routes",
+    "mysql",
+    "orm",
+    "promise",
+    "steplix"
+  ],
   "dependencies": {
     "async": "^3.1.0",
     "bluebird": "^3.7.1",
