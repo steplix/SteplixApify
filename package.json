@@ -36,7 +36,7 @@
     "pluralize": "^8.0.0",
     "pretty-ms": "^5.1.0",
     "steplix-database": "0.0.2",
-    "steplix-http-exception": "0.0.1"
+    "steplix-http-exception": "0.0.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
