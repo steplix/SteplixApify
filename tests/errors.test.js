@@ -1,12 +1,12 @@
 'use strict';
 
 const http = require('http-constants');
-const { Errors } = require('../core/steplix');
+const { Errors } = require('steplix-http-exception');
 
 describe('Errors', () => {
     describe('InternalServerError', () => {
         it(`should return code/status ${http.codes.INTERNAL_SERVER_ERROR}`, done => {
-            const result = new Errors.InternalServerError('Internal Server Error');
+            const result = new Errors.InternalServerError();
 
             expect(result).to.have.property('code').to.be.a('number').equal(http.codes.INTERNAL_SERVER_ERROR);
             expect(result).to.have.property('message').to.be.a('string').equal('Internal Server Error');
@@ -17,7 +17,7 @@ describe('Errors', () => {
 
     describe('NotFound', () => {
         it(`should return code/status ${http.codes.NOT_FOUND}`, done => {
-            const result = new Errors.NotFound('Not Found');
+            const result = new Errors.NotFound();
 
             expect(result).to.have.property('code').to.be.a('number').equal(http.codes.NOT_FOUND);
             expect(result).to.have.property('message').to.be.a('string').equal('Not Found');
@@ -26,9 +26,9 @@ describe('Errors', () => {
         });
     });
 
-    describe('ConflictError', () => {
+    describe('Conflict', () => {
         it(`should return code/status ${http.codes.CONFLICT}`, done => {
-            const result = new Errors.ConflictError('Conflict');
+            const result = new Errors.Conflict();
 
             expect(result).to.have.property('code').to.be.a('number').equal(http.codes.CONFLICT);
             expect(result).to.have.property('message').to.be.a('string').equal('Conflict');
@@ -39,7 +39,7 @@ describe('Errors', () => {
 
     describe('Unauthorized', () => {
         it(`should return code/status ${http.codes.UNAUTHORIZED}`, done => {
-            const result = new Errors.Unauthorized('Unauthorized');
+            const result = new Errors.Unauthorized();
 
             expect(result).to.have.property('code').to.be.a('number').equal(http.codes.UNAUTHORIZED);
             expect(result).to.have.property('message').to.be.a('string').equal('Unauthorized');
@@ -50,7 +50,7 @@ describe('Errors', () => {
 
     describe('BadRequest', () => {
         it(`should return code/status ${http.codes.BAD_REQUEST}`, done => {
-            const result = new Errors.BadRequest('Bad Request');
+            const result = new Errors.BadRequest();
 
             expect(result).to.have.property('code').to.be.a('number').equal(http.codes.BAD_REQUEST);
             expect(result).to.have.property('message').to.be.a('string').equal('Bad Request');

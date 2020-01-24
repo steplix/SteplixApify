@@ -3,7 +3,7 @@
 const _ = require('lodash');
 const P = require('bluebird');
 const pluralize = require('pluralize');
-const Errors = require('../../../../errors');
+const { Errors } = require('steplix-http-exception');
 
 module.exports = (table, child, models) => {
     return (req, res) => {

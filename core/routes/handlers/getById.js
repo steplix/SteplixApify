@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const Errors = require('../../errors');
+const { Errors } = require('steplix-http-exception');
 
 module.exports = (table, models) => {
     return (req, res) => {

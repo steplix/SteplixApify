@@ -1,6 +1,6 @@
 'use strict';
 
-const Errors = require('../../../../errors');
+const { Errors } = require('steplix-http-exception');
 
 module.exports = (table, child, models) => {
     return (req, res) => {
