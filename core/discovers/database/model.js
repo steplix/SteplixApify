@@ -75,7 +75,12 @@ class ApifyModel extends Model {
                 opts.withOut = options.withOut.concat(opts.withOut);
             }
 
-            return this.models[_.upperFirst(_.camelCase(child))].getById(id, opts).then(result => {
+            const childModel = this.models[_.upperFirst(_.camelCase(child))];
+
+            if (!childModel) {
+                return model;
+            }
+            return childModel.getById(id, opts).then(result => {
                 if (result) {
                     model[property.replace(`${entity}_`, '')] = result;
                     delete model[idField];
@@ -114,7 +119,12 @@ class ApifyModel extends Model {
                 withOut: [entity]
             };
 
-            return this.models[modelName].find(opts).then(results => {
+            const childModel = this.models[modelName];
+
+            if (!childModel) {
+                return model;
+            }
+            return childModel.find(opts).then(results => {
                 if (results) {
                     model[property] = _.map(results, result => {
                         delete result[idField];
