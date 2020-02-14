@@ -21,12 +21,12 @@ module.exports = (table, models) => {
             options.raw = true;
         }
 
-        if (req.query.withOut) {
-            options.withOut = _.map(req.query.withOut.split(','), _.trim);
+        if (req.query.without) {
+            options.without = _.map(req.query.without.split(','), _.trim);
         }
         // Prevent circular reference.
-        options.withOut = options.withOut || [];
-        options.withOut.push(table.nomenclature.relationship);
+        options.without = options.without || [];
+        options.without.push(table.nomenclature.relationship);
 
         if (req.query.fields) {
             options.fields = _.map(req.query.fields.split(','), _.trim);

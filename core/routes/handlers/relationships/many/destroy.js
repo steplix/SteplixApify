@@ -20,7 +20,7 @@ module.exports = (table, child, models) => {
             throw new Errors.NotFound(`${child.nomenclature.title} not found`);
         }
 
-        options.withOut = [table.nomenclature.relationship];
+        options.without = [table.nomenclature.relationship];
 
         options.where = options.where || {};
         options.where[`id_${table.nomenclature.relationship}`] = id;

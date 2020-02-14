@@ -18,7 +18,7 @@ module.exports = (table, child, models) => {
             options.raw = true;
         }
 
-        options.withOut = [table.nomenclature.relationship];
+        options.without = [table.nomenclature.relationship];
 
         return P.resolve()
             .then(() => validate(id, idChild, options))

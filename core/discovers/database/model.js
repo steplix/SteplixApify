@@ -62,17 +62,17 @@ class ApifyModel extends Model {
             const idField = `id_${property}`;
             const id = model[idField];
 
-            if (!id || (options.withOut && (options.withOut.includes(entity) || options.withOut.includes(property)))) {
+            if (!id || (options.without && (options.without.includes(entity) || options.without.includes(property)))) {
                 delete model[idField];
                 return model;
             }
 
             const opts = {
-                withOut: [entity]
+                without: [entity]
             };
 
-            if (options.withOut) {
-                opts.withOut = options.withOut.concat(opts.withOut);
+            if (options.without) {
+                opts.without = options.without.concat(opts.without);
             }
 
             const childModel = this.models[_.upperFirst(_.camelCase(child))];
@@ -106,7 +106,7 @@ class ApifyModel extends Model {
 
             const property = _.camelCase(child.replace(entity, ''));
 
-            if (options.withOut && options.withOut.includes(property)) {
+            if (options.without && options.without.includes(property)) {
                 return model;
             }
 
@@ -116,7 +116,7 @@ class ApifyModel extends Model {
                 where: {
                     [idField]: model.id
                 },
-                withOut: [entity]
+                without: [entity]
             };
 
             const childModel = this.models[modelName];

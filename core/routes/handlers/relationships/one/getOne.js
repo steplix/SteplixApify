@@ -16,13 +16,13 @@ module.exports = (table, child, models) => {
             options.raw = true;
         }
 
-        if (req.query.withOut) {
-            options.withOut = _.map(req.query.withOut.split(','), _.trim);
+        if (req.query.without) {
+            options.without = _.map(req.query.without.split(','), _.trim);
         }
 
-        options.withOut = options.withOut || [];
-        if (!options.withOut.includes(table.nomenclature.relationship)) {
-            options.withOut.push(table.nomenclature.relationship);
+        options.without = options.without || [];
+        if (!options.without.includes(table.nomenclature.relationship)) {
+            options.without.push(table.nomenclature.relationship);
         }
 
         if (req.query.fields) {
