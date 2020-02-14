@@ -1,6 +1,6 @@
 {
   "name": "steplix-apify",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Steplix Apify is Database mapper to routes.",
   "main": "index.js",
   "scripts": {
